@@ -1,0 +1,19 @@
+.cont {
+    background-color: rgb(242, 242, 243);
+}
+
+.terms-container {
+    padding: 32px;
+    width: 978px;
+    background-color: #fff;
+    margin: 0 auto;
+    min-width: 978px;
+    max-width: 1680px;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.policies-a{
+    color: #2874f0;
+}

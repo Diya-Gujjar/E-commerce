@@ -1,0 +1,219 @@
+.register-header {
+  background-color: #2874f0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  height: 56px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 5px;
+  color: #ffffff;
+  align-items: center;
+  padding: 0 200px;
+}
+
+.rgstr-nav {
+  width: 100%;
+  max-width: 1350px;
+  display: flex;
+  align-items: center;
+}
+
+.logo2 {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo-flpkrt {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.logo-plus {
+  font-size: 9px;
+}
+
+.logo-img {
+  max-height: fit-content;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.horiz-split {
+  display: none;
+}
+
+.rgstr-header-search {
+  display: flex;
+  align-items: center;
+  background-color: #f0f5ff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  flex-grow: 1;
+  margin: 0 20px;
+  max-width: 400px;
+}
+
+.rgstr-search-icon {
+  margin-right: 10px;
+  color: #2874f0;
+  font-size: 22px;
+}
+
+.rgstr-header-search input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  font-size: 15px;
+}
+
+.rgstr-header-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding-right: 10px;
+  padding-left: 0px;
+  justify-content: space-between;
+}
+
+.rgstr-lnk {
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  font-size: 17px;
+}
+
+.rgstr-icon {
+  font-size: 18px;
+  color: #fff;
+  padding-right: 5px;
+}
+
+.rgstr-login-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  padding: 5px 20px;
+  border-radius: 2px;
+  font-weight: 500;
+  color: #2874f0;
+}
+
+.rgstr-login-btn:hover {
+  background-color: #fff;
+  color: #2874f0;
+}
+
+.login-dropdown,
+.menu-dropdown {
+  position: absolute;
+  background: white;
+  color: black;
+  list-style: none;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  top: 50px;
+  left: 0;
+  width: 230px;
+  text-align: left;
+}
+
+.login-dropdown li,
+.menu-dropdown li {
+  padding: 10px 15px;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.login-dropdown li:hover,
+.menu-dropdown li:hover {
+  background-color: #f1f1f1;
+}
+
+.login-dropdown li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.menu-dropdown {
+  width: 180px;
+}
+
+.icon-content {
+  display: flex;
+}
+
+@media (max-width: 1191px) and (min-width: 768px) {
+  .small-disapper {
+    display: none;
+  }
+
+  .header {
+    height: 48px;
+  }
+
+  .register-header {
+    padding: 0 70px;
+  }
+
+  @media (max-width: 868px) {
+    .register-header {
+      padding: 0 50px;
+    }
+
+    .header-list {
+      gap: 0px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+
+  .menu-icon,
+  .small-disapper {
+    display: none;
+  }
+
+  .register-header {
+    padding: 0 50px;
+  }
+
+  .horiz-split {
+    display: flex;
+    font-size: 20px;
+  }
+
+  .logo {
+    max-height: 40px;
+  }
+
+  .header {
+    height: 48px;
+  }
+
+  .header-list {
+    gap: 0px;
+  }
+
+  #header-seller,
+  .header-search,
+  .arrow-down {
+    display: none;
+  }
+
+  .inc-size {
+    font-size: 22px;
+  }
+}

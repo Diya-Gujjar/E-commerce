@@ -1,0 +1,32 @@
+.desc-container {
+    display: flex;
+}
+
+.left-desc,
+.right-desc {
+    margin: auto;
+    width: 45%;
+    border: 1px solid black;
+}
+
+.left-desc {
+    height: 100%;
+}
+
+.right-desc {
+    text-align: left;
+    padding: 10px;
+}
+
+.desc-hdng {
+    font-weight: 600;
+    margin: 10px 2px;
+}
+
+.hdng-highlights {
+    list-style: none;
+}
+
+.hdng-highlights li {
+    padding: 5px;
+}

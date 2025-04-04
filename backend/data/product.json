@@ -1,0 +1,19 @@
+[
+    {
+        "id" : 1,
+        "name" : "Smart Watches",
+        "price" : 20000
+    },
+    
+    {
+        "id" : 2,
+        "name" : "Women Top",
+        "price" : 20000
+    },
+    
+    {
+        "id" : 3,
+        "name" : "Men's Shirt",
+        "price" : 20000
+    }
+]
