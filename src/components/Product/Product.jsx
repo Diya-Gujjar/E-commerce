@@ -1,17 +1,26 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Product.css";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/productDescription/${product.category}/${product.id}`);
+  };
+
   return (
     <div className="product-card">
-      <div className="product-image">
-        <img src={product.image} alt={product.title} />
-      </div>
-      <div className="product-info">
-        <div className="product-title">{product.title}</div>
-        <div className="product-category">{product.category}</div>
-        <div className="product-price">{`Rs. ${product.price}`}</div>
-      </div>
+      <button onClick={handleNavigate} className="no-design">
+        <div className="product-image">
+          <img src={product.image} alt={product.title} />
+        </div>
+        <div className="product-info">
+          <div className="product-title">{product.title}</div>
+          <div className="product-category">{product.category}</div>
+          <div className="product-price">{`Rs. ${product.price}`}</div>
+        </div>
+      </button>
     </div>
   );
 };

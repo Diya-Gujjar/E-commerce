@@ -216,6 +216,12 @@
   font-size: 22px;
 }
 
+@media (max-width: 1440px) and (min-width: 1200px) {
+  .logo img {
+    height: 50px;
+    padding-bottom: 20px;
+  }
+}
 
 @media (max-width: 1191px) and (min-width: 768px) {
   .small-disapper {
@@ -237,7 +243,8 @@
   }
 
   .logo img {
-    height: 50px;
+    height: 48px;
+    /* padding-bottom: 10px; */
   }
 
   .header-search {

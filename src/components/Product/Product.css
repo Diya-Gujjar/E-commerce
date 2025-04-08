@@ -8,6 +8,11 @@
    position: relative;
  }
 
+ .no-design {
+   border-style: none;
+   background-color: transparent;
+ }
+
  .card-title {
    font-size: 20px;
    font-weight: bold;

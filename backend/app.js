@@ -6,45 +6,74 @@ let app = express();
 
 app.use(cors());
 
-let product = [];
-
-fs.readFile("./data/product.json", "utf8", (err, data) => {
+let electronics = [];
+fs.readFile("./data/electronics.json", "utf8", (err, data) => {
   if (err) {
     console.error("Error reading product data:", err);
     return;
   }
-  product = JSON.parse(data);
+  electronics = JSON.parse(data);
 });
 
-let carousel = [];
-fs.readFile("./data/carousel.json", "utf8", (err, data) => {
+let smartPhone = [];
+fs.readFile("./data/smartPhone.json", "utf8", (err, data) => {
   if (err) {
-    console.error("Error in rendering Carousel", err);
+    console.error("Error reading product data:", err);
     return;
   }
-  carousel = JSON.parse(data);
+  smartPhone = JSON.parse(data);
 });
 
-app.get("/api/product", (req, res) => {
-  if (product.length === 0) {
+app.get("/api/electronics", (req, res) => {
+  if (electronics.length === 0) {
     return res.status(404).json({
       status: "error",
       message: "No products found",
     });
   }
-
-  res.json({
-    status: "success",
-    data: product,
-  });
+  res.json(electronics);
 });
 
-app.get("/api/carousel/:id", (req, res) => {
-  const id = req.params.id * 1;
-  res.json({
-    data: carousel[id - 1],
-  });
+app.get("/api/smartPhone", (req, res) => {
+  if (smartPhone.length === 0) {
+    return res.status(404).json({
+      status: "error",
+      message: "No products found",
+    });
+  }
+  res.json(smartPhone);
 });
+
+app.get("/api/electronics/:id", (req, res) => {
+  const id = req.params.id;
+  const elect = electronics.find((elect) => elect.id === id);
+  if (elect) {
+    res.json(elect);
+  } else {
+    res.status(404).json({ error: "Not found" });
+  }
+});
+
+app.get("/api/smartPhone/:id", (req, res) => {
+  const id = req.params.id;
+  const phone = smartPhone.find((phone) => phone.id === id);
+  if (phone) {
+    res.json(phone);
+  } else {
+    res.status(404).json({ error: "Phone not found" });
+  }
+});
+
+// app.get("/api/:category/:id", (req, res) => {
+//   const id = req.params.id;
+//   const category = req.params.category;
+//   const prod = { category }.find((prod) => prod.id === id);
+//   if (prod) {
+//     res.json(prod);
+//   } else {
+//     res.status(404).json({ error: "Product not found" });
+//   }
+// });
 
 app.use(express.json());
 

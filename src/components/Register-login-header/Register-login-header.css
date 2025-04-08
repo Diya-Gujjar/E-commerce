@@ -155,6 +155,16 @@
   display: flex;
 }
 
+@media (max-width: 1440px) and (min-width: 1200px) {
+  .logo2 {
+    padding-top: 10px;
+  }
+
+  .logo-plus {
+    display: flex;
+  }
+}
+
 @media (max-width: 1191px) and (min-width: 768px) {
   .small-disapper {
     display: none;

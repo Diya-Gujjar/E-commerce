@@ -11,6 +11,7 @@ import Policies from "./components/TermsAndPolicies/Policies";
 import Footer from "./components/Footer/Footer";
 import { useState } from "react";
 import ProductDescription from "./components/Product/ProductDescription";
+import AddToCart from "./components/AddToCart/AddToCart";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -29,9 +30,13 @@ function App() {
           <Route path="/registerAdmin" element={<RegisterAdmin />}></Route>
           <Route path="/terms" element={<Terms />}></Route>
           <Route path="/policies" element={<Policies />}></Route>
+          <Route
+            path="/addToCart/:category/:id"
+            element={<AddToCart />}
+          ></Route>
           <Route path="/cart" element={<Cart isLogged={isLogged} />}></Route>
           <Route
-            path="/productDescription/:id"
+            path="/productDescription/:category/:id"
             element={<ProductDescription />}
           ></Route>
         </Routes>

@@ -102,6 +102,7 @@ function RegisterLoginHeader() {
           </li>
           <li
             className="rgstr-lnk menu-icon"
+            id="header-more"
             onMouseEnter={() => setMenuHovered(true)}
             onMouseLeave={() => setMenuHovered(false)}
           >

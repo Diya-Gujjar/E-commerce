@@ -1,44 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import "./Home.css";
-// import axios from "axios";
 import Carousel from "../Carousel/Carousel";
 import ProductCardContainer from "../Product/Product";
-import Electronics from "../Product/Electronics";
-import SmartPhone from "../Product/SmartPhone";
+import axios from "axios";
 
 function Home() {
-  // const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  const [electronics, setElectronics] = useState([]);
+  const [smartphone, setSmartphone] = useState([]);
 
-  // fetch("http://localhost:8000/api/product")
-  //   .then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
-  //     return response.json();
-  //   })
-  //   .then((data) => console.log(data))
-  //   .catch((error) => console.error("Failed to fetch data:", error));
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/electronics")
+      .then((response) => {
+        if (response && response.data) {
+          setElectronics(response.data);
+        } else {
+          console.log("No data returned from the API");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching Electronics:", error);
+      });
 
-  // const fetchedData = useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:8000/api/product");
-  //       setData(response.data);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+    axios
+      .get("http://localhost:8000/api/smartphone")
+      .then((response) => {
+        if (response && response.data) {
+          setSmartphone(response.data);
+        } else {
+          console.log("No data returned from the API");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching Phone:", error);
+      });
+  }, []);
+  console.log({ electronics });
+  console.log({ smartphone });
 
-  //   fetchData();
-  // }, []);
-
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error}</p>;
   return (
     <div className="overall-cntnr">
       <Header />
@@ -65,13 +65,13 @@ function Home() {
         >
           <div className="card">
             <ProductCardContainer
-              products={Electronics}
+              products={electronics}
               cardTitle="Electronics"
             />
           </div>
           <div className="card">
             <ProductCardContainer
-              products={SmartPhone}
+              products={smartphone}
               cardTitle="SmartPhone"
             />
           </div>
