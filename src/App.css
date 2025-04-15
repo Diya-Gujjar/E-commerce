@@ -1,14 +1,15 @@
+body, button, input, select, textarea {
+  font-family: Inter, -apple-system, Helvetica, Arial, sans-serif;
+}
+
 .App {
   text-align: center;
+  font-family: Inter, -apple-system, Helvetica, Arial, sans-serif;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-.header{
-  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2); 
 }
 
 .form-container {
@@ -29,18 +30,98 @@
   text-align: left;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  }
+  
+/* .nav {
+  max-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  list-style: none;
+}
+
+.logo img {
+  height: 65px;
+  max-width: 150px;
+}
+
 .header-list {
   list-style: none;
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
   margin: 0;
   padding: 0;
 }
 
 .lnk {
-  margin: 5px 5px;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+
+.start-selling {
+  margin: 2px 5px;
   padding: 5px;
   border-radius: 4px;
-  background-color: rgb(152, 151, 151);
+  background-color: rgb(226, 197, 100);
+}
+
+a {
+text-decoration: none;
+color: inherit;
+}
+
+.clk-lnk {
+text-decoration: underline;
+}
+
+.form-error {
+  font-size: 11px;
+  margin-top: 0px;
+  margin-bottom: 2px;
+  color: red;
+}
+
+button {
+  margin: 5px;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2); 
+}
+
+.seller-div {
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2); 
+  background-image: url('https://static-assets-web.flixcart.com/fk-sp-static/images/prelogin/banner/Desktop_sell.webp');
+  width: 90%;
+  height: 120px;
+  text-align: left;
+  margin: auto;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 600;
+  padding-top: 100px;
+  padding-left: 100px;
+}
+
+.admin-register-container {
+  margin: auto;
+  width: 50%;
+  box-shadow: 4px 4px 2px -2px rgba(0, 0, 0, 0.2); 
+}
+
+.admin-input {
+  padding-top: 20px;
+  padding-left: 80px;
+  min-height: 60px;
+  text-align: left;
+} */
+
+#MobileNo, #emailID, #gst, #Name, #pswd {
+  padding: 10px;
+  width: 75%;
+  border-radius: 10px;
+  font-size: 15px;
 }

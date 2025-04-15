@@ -1,0 +1,126 @@
+.overall-cntnr {
+  padding-top: 50px;
+}
+
+.home-container {
+  background-color: rgb(237, 236, 236);
+  padding: 10px;
+}
+
+.shortcut {
+  background-color: #fff;
+  height: 110px;
+  margin: 10px;
+}
+
+.carousel {
+  background-color: #fff;
+  height: 150px;
+  margin: 10px;
+}
+
+.electronics,
+.beauty-food-toys,
+.grooming {
+  background-color: #fff;
+  margin: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-container {
+  background-color: rgb(237, 236, 236);
+  padding: 20px;
+}
+
+.shortcut {
+  background-color: #fff;
+  height: 110px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.carousel {
+  background-color: #fff;
+  height: 150px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.electronics,
+.beauty-food-toys,
+.grooming {
+  background-color: #fff;
+  height: 200px;
+  margin: 20px 0;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.product-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 1px solid #e0e0e0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.product-info {
+  padding: 16px;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.product-category {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #1e6d70;
+}
+
+@media (max-width: 768px) {
+  .product-title {
+    font-size: 14px;
+  }
+
+  .product-price {
+    font-size: 14px;
+  }
+
+  .product-category {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card {
+    margin: 0 auto;
+  }
+}

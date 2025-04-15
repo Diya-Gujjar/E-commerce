@@ -1,0 +1,45 @@
+.carousel-cntnr {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-cntnr img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-cntnr button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: white; 
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s ease;
+  z-index: 10;
+  user-select: none;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-cntnr .prev-btn {
+  left: 20px;
+}
+
+.carousel-cntnr .next-btn {
+  right: 20px;
+}
+
+.carousel-cntnr button:hover {
+  color: #ddd;
+}
