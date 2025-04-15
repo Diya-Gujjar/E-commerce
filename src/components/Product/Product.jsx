@@ -31,6 +31,18 @@ const ProductCardContainer = ({ products, cardTitle }) => {
   const [showRight, setShowRight] = useState(true);
 
   useEffect(() => {
+    const container = containerRef.current;
+    const handleScroll = () => {
+      checkScrollPosition();
+    };
+    container.addEventListener("scroll", handleScroll);
+    checkScrollPosition();
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     checkScrollPosition();
   }, []);
 
@@ -47,12 +59,26 @@ const ProductCardContainer = ({ products, cardTitle }) => {
     const scrollAmount = 500;
 
     if (direction === "left") {
-      container.scrollLeft -= scrollAmount;
+      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     } else {
-      container.scrollLeft += scrollAmount;
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
-    checkScrollPosition();
+    setTimeout(() => {
+      checkScrollPosition();
+    }, 300);
   };
+
+  // const scroll = (direction) => {
+  //   const container = containerRef.current;
+  //   const scrollAmount = 500;
+
+  //   if (direction === "left") {
+  //     container.scrollLeft -= scrollAmount;
+  //   } else {
+  //     container.scrollLeft += scrollAmount;
+  //   }
+  //   checkScrollPosition();
+  // };
 
   return (
     <div className="contt">

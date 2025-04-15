@@ -1,4 +1,5 @@
 import React from "react";
+import AddToCart from "../AddToCart/AddToCart";
 
 function Cart({ isLogged }) {
   return (
@@ -6,7 +7,7 @@ function Cart({ isLogged }) {
       {!isLogged ? (
         <a href="/login"> You are not logged in : Log In first</a>
       ) : (
-        <p>Cart Empty</p>
+        <AddToCart />
       )}
     </div>
   );
