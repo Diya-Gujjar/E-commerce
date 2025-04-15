@@ -10,6 +10,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { TbSquareArrowDown } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import HamBurger from "../Hamburger/HamBurger";
+import useStore from "../ZustandStore/Store";
 
 function Header() {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ function Header() {
   const [isHovered, setIsHovered] = useState(false);
   const [menuHovered, setMenuHovered] = useState(false);
   const [burgerState, setBurgerState] = useState(false);
+
+  const cartItems = useStore((state) => state.cart);
 
   const handleBurgerClick = () => {
     setBurgerState((prevState) => !prevState);
@@ -98,7 +101,10 @@ function Header() {
           </li>
           <li className="lnk" id="header-cart">
             <a href="/cart" className="icon-content">
-              <PiShoppingCart className="icon inc-size" />
+              <PiShoppingCart className="icon inc-size" id="cart-icon" />
+              {cartItems.length > 0 && (
+                <div className="cart-count">{cartItems.length}</div>
+              )}
               <div className="small-disapper"> Cart </div>
             </a>
           </li>

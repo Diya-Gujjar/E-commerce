@@ -1,11 +1,11 @@
 import React from "react";
-import RegisterLoginHeader from "../Register-login-header/Register-login-header";
+import Header from "../Header/Header";
 import ShortLink from "../ShortLink/ShortLink";
 
 function Policies() {
   return (
     <div className="cont">
-      <RegisterLoginHeader />
+      <Header />
       <ShortLink />
       <div className="terms-container">
         <div>

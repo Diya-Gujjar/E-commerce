@@ -43,6 +43,7 @@
   width: 94%;
   border-bottom: 1px solid rgb(216, 216, 216);
   font-size: 15px;
+  padding: 8px 0;
 }
 
 #signinNo:focus {
@@ -97,20 +98,63 @@
   text-decoration: underline;
 }
 
+.shrt-lnk-elements {
+  justify-content: space-around;
+}
+
 @media (max-width: 768px) {
   .login-container {
-    flex-direction: column;
+    /* flex-direction: column; */
     height: auto;
     padding: 20px;
   }
 
   .left-login,
   .right-login {
-    width: 100%;
+    width: 48%;
     margin-bottom: 20px;
+    min-height: 300px;
   }
 
   .right-login form {
+    width: 100%;
+  }
+
+  .register-lnk {
+    margin-left: 40px;
+  }
+
+  #signinNo {
+    padding: 5px;
+  }
+
+  .shrt-lnk-element {
+    flex: 1;
+    /* padding: 0 2px; */
+  }
+}
+
+@media (max-width: 425px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .left-login,
+  .right-login {
+    width: 100%;
+  }
+
+  .shrt-lnk-elements {
+    padding: 0 4px;
+    font-size: 10px;
+  }
+
+  .shrt-lnk-element {
+    font-weight: 200;
+    font-size: 8px;
+  }
+
+  #signinNo {
     width: 100%;
   }
 }

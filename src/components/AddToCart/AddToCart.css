@@ -1,59 +1,211 @@
-/* .footer-cntnr {
-    display: none;
-} */
-
-/* #header-seller,
-#header-cart,
-#header-more {
-    display: none;
-} */
-
-.bg-color {
-    background-color: rgb(237, 235, 235);
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f3f6;
 }
 
-.cart-items {
+.cart-page {
+    padding: 20px;
+}
+
+.cart-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    flex-wrap: wrap;
 }
 
-.item-detail {
+.cart-left {
+    flex: 2;
+    min-width: 60%;
+}
+
+.cart-header {
+    background-color: #fff;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.cart-card {
+    background: #fff;
+    padding: 16px;
     display: flex;
-    flex-direction: row;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    padding: 40px;
-    width: 65%;
-    margin-right: 1%;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.item-detail img {
-    max-height: 150px;
-    max-width: 100px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+.cart-img img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
 }
 
-.item-right {
-    padding-left: 40px;
-}
-
-.price-detail {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    width: 25%;
-}
-
-.prc-hdng {
-    padding: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    color: #686868;
+.cart-info {
+    padding-left: 16px;
     text-align: left;
 }
 
-.prc-dtls {
+.cart-info h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.seller,
+.clr {
+    color: #888;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.price-block {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.final-price {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.discount {
+    color: #388e3c;
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.qty-control button {
+    padding: 4px 10px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.action-buttons {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #2874f0;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.save-btn {
+    background: none;
+    border: none;
+    color: #388e3c;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.cart-right {
+    flex: 1;
+    background: #fff;
+    padding: 5px 20px;
+    height: fit-content;
+    border-radius: 4px;
+    position: sticky;
+    top: 80px;
+    min-width: 280px;
+    margin-bottom: 55px;
+}
+
+.cart-right h3 {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.price-row {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    margin: 19px 0;
+}
+
+.price-row.total {
+    font-weight: bold;
+}
+
+.discount-text {
+    color: #388e3c;
+}
+
+.place-order {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.place-order button {
+    background-color: #fb641b;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.empty-cart {
+    text-align: center;
+    margin-top: 80px;
+    font-size: 22px;
+    color: #555;
+}
+
+.qty-remove-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .cart-wrapper {
+        flex-direction: column;
+    }
+
+    .cart-right {
+        position: relative;
+        top: unset;
+        margin-top: 20px;
+    }
+
+    .cart-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cart-info {
+        padding-left: 0;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .place-order {
+        text-align: center;
+    }
 }

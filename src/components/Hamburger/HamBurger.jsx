@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./HamBurger.css";
+import classNames from "classnames";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPerson } from "react-icons/io5";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
@@ -27,8 +28,14 @@ function HamBurger() {
     };
   }, [isOpen]);
 
+  const divClass = classNames({
+    "hamburger-container": true,
+    open: isOpen,
+  });
+
   return (
-    <div className={`hamburger-container  ${isOpen ? "open" : ""} `}>
+    <div className={divClass}>
+      {/* <div className={`hamburger-container  ${isOpen ? "open" : ""} `}> */}
       <div className="hamburger-header">
         <div className="header-auth">
           <IoPerson />
