@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import RegisterLoginHeader from "../Register-login-header/Register-login-header";
+import Header from "../Header/Header";
 import ShortLink from "../ShortLink/ShortLink";
 
 function Login({ setIsLogged }) {
@@ -34,12 +34,15 @@ function Login({ setIsLogged }) {
 
   return (
     <div>
-      <RegisterLoginHeader />
+      <Header />
+      <div style={{ paddingTop: "52px" }} />
       <ShortLink />
       <div className="login-container">
         <div className="left-login">
           <h1>Login</h1>
-          <p>Get access to your Orders, Wishlist and Recommendations</p>
+          <p style={{ paddingTop: "15px" }}>
+            Get access to your Orders, Wishlist and Recommendations
+          </p>
         </div>
 
         <div className="right-login">
