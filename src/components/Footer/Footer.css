@@ -191,7 +191,7 @@
     }
 }
 
-@media (max-width: 426px) {
+@media (max-width: 425px) {
     .footer-cntnr {
         display: none;
     }
