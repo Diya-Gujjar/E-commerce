@@ -1,0 +1,136 @@
+.orders-page {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.user-orders-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-orders-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.empty-orders-text {
+    font-size: 18px;
+    color: #666;
+}
+
+.user-order-card {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.user-order-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.user-order-header h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.user-order-header p {
+    font-size: 14px;
+    color: #888;
+}
+
+.pymt-status {
+    color: #0073e6;
+    font-weight: 600;
+}
+
+.order-total-pymt {
+    font-size: 16px;
+    font-weight: 600;
+    color: #28a745;
+}
+
+.all-order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-item {
+    display: flex;
+    gap: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.ordr-product-image img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+.ordr-product-details {
+    flex-grow: 1;
+}
+
+.ordr-product-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.ordr-product-size-color {
+    font-size: 14px;
+    color: #888;
+    margin: 5px 0;
+}
+
+.ordr-price-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ordr-product-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.ordr-product-discount {
+    font-size: 14px;
+    color: #d9534f;
+}
+
+.ordr-product-quantity {
+    font-size: 14px;
+    color: #888;
+}
+
+@media (max-width: 768px) {
+    .user-order-header {
+        flex-direction: column;
+    }
+
+    .user-order-header p {
+        padding-top: 10px;
+    }
+
+    .ordr-price-info {
+        justify-content: center;
+    }
+
+    .ordr-product-details span {
+        padding: 10px 0;
+    }
+}

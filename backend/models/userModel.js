@@ -5,13 +5,16 @@ const userSchema = new mongoose.Schema(
     mobile: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     password: { type: String, required: true },
+    isAdmin: { type: Boolean, required: true, default: false },
+    isSeller: { type: Boolean, required: true, default: false },
+    gstIn: { type: String },
     address: {
-      street: String,
       city: String,
       state: String,
-      zipCode: String,
+      pinCode: String,
       country: String,
     },
+
     cart: [
       {
         productId: { type: String },
@@ -26,9 +29,16 @@ const userSchema = new mongoose.Schema(
         products: [
           {
             productId: { type: String },
+            name: String,
             quantity: Number,
             size: String,
             color: String,
+            price: Number,
+            discount: Number,
+            finalPrice: Number,
+            deliveryCharge: Number,
+            image: String,
+            seller: String,
           },
         ],
         totalAmount: Number,
@@ -50,6 +60,12 @@ const userSchema = new mongoose.Schema(
           default: "pending",
         },
         createdAt: { type: Date, default: Date.now },
+      },
+    ],
+    productIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
       },
     ],
   },
