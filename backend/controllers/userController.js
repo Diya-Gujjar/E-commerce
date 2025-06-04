@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const Product = require("../models/Product");
 
 exports.addToCart = async (req, res) => {
   const { userId, productId, quantity } = req.body;
@@ -23,14 +24,15 @@ exports.addToCart = async (req, res) => {
     res.status(200).json({ message: "Added to cart", cart: user.cart });
   } catch (err) {
     console.error("Error adding to cart:", err);
-    res
-      .status(500)
-      .json({ message: "Error adding to cart", error: err.message });
+    res.status(500).json({
+      message: "Error adding to cart",
+      error: err.message,
+    });
   }
 };
 
 exports.getCart = async (req, res) => {
-  const { userId } = req.query;
+  const { userId } = req.params;
 
   try {
     const user = await User.findById(userId);
@@ -43,12 +45,18 @@ exports.getCart = async (req, res) => {
 };
 
 exports.getOrders = async (req, res) => {
-  const { userId } = req.query;
+  const { userId } = req.params;
 
   try {
     const user = await User.findById(userId);
-    res.json(user.orders);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ orders: user.orders || [] });
   } catch (err) {
+    console.error("Error fetching orders:", err);
     res
       .status(500)
       .json({ message: "Error fetching orders", error: err.message });
@@ -105,13 +113,20 @@ exports.removeFromCart = async (req, res) => {
 };
 
 exports.updateAddress = async (req, res) => {
-  const { userId, street, city, state, zipCode, country } = req.body;
+  console.log("Request Body:", req.body);
+
+  const { user_id } = req.params;
+  const { city, state, pinCode, country } = req.body;
+
+  if (!city || !state || !pinCode || !country) {
+    return res.status(400).json({ message: "All address fields are required" });
+  }
 
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById({ _id: user_id });
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    user.address = { street, city, state, zipCode, country };
+    user.address = { city, state, pinCode, country };
     await user.save();
 
     res
@@ -123,29 +138,86 @@ exports.updateAddress = async (req, res) => {
 };
 
 exports.placeOrder = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
 
   try {
     const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    if (!user.cart.length)
+    if (!user.cart || user.cart.length === 0) {
       return res.status(400).json({ message: "Cart is empty" });
+    }
 
-    const total = user.cart.reduce((acc, item) => acc + item.quantity * 100, 0);
+    const productIds = user.cart.map((item) => item.productId);
+    const productsFromDB = await Product.find({ id: { $in: productIds } });
 
-    user.orders.push({
-      orderId: new Date().getTime(),
-      products: [...user.cart],
-      totalAmount: total,
+    const orderProducts = user.cart.map((cartItem) => {
+      const product = productsFromDB.find((p) => p.id === cartItem.productId);
+
+      const price = product?.price || 0;
+      const discount = product?.discount || 0;
+      const deliveryCharge = product?.deliveryCharge || 0;
+      const finalPrice = price - discount;
+
+      return {
+        productId: cartItem.productId,
+        name: product?.name || "Unknown",
+        quantity: cartItem.quantity,
+        size: cartItem.size,
+        color: cartItem.color,
+        price,
+        discount,
+        finalPrice,
+        deliveryCharge,
+        image: product?.image || "",
+        seller: product?.seller || "Default Seller",
+      };
     });
 
+    const totalAmount = orderProducts.reduce(
+      (acc, item) =>
+        acc + item.quantity * item.finalPrice + item.deliveryCharge,
+      0
+    );
+
+    const newOrder = {
+      orderId: Date.now().toString(),
+      products: orderProducts,
+      totalAmount,
+      shippingAddress: user.address,
+      paymentStatus: "completed",
+      status: "pending",
+      createdAt: new Date(),
+    };
+
+    user.orders.push(newOrder);
     user.cart = [];
     await user.save();
 
-    res.json({ message: "Order placed", orders: user.orders });
+    res.status(200).json({ message: "Order placed", orders: user.orders });
   } catch (err) {
+    console.error("Order placement error:", err);
     res
       .status(500)
       .json({ message: "Error placing order", error: err.message });
+  }
+};
+
+exports.emptyCart = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (!user.cart || user.cart.length === 0) {
+      return res.status(400).json({ message: "Cart is already empty" });
+    }
+    user.cart = [];
+    await user.save();
+  } catch (err) {
+    console.error("Cart not Empty:", err);
+    res
+      .status(500)
+      .json({ message: "Error clearing cart", error: err.message });
   }
 };
