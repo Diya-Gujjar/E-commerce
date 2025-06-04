@@ -1,10 +1,13 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const cors = require("cors");
 
 let app = express();
 
 app.use(cors());
+app.use(express.json());
 
 let electronics = [];
 fs.readFile("./data/electronics.json", "utf8", (err, data) => {
@@ -75,7 +78,49 @@ app.get("/api/smartPhone/:id", (req, res) => {
 //   }
 // });
 
-app.use(express.json());
+app.post("/api/register", async (req, res) => {
+  const { mobile, username, password } = req.body;
+
+  const userExists = users.find((user) => user.mobile === mobile);
+  if (userExists) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Username already taken" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = { mobile, username, password: hashedPassword };
+  users.push(newUser);
+
+  res
+    .status(201)
+    .json({ success: true, message: "User registered successfully!" });
+});
+
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  const user = users.find((user) => user.username === username);
+  if (!user) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid username or password" });
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid username or password" });
+  }
+
+  const token = jwt.sign({ username: user.username }, "your_jwt_secret", {
+    expiresIn: "1h",
+  });
+
+  res.json({ success: true, message: "Login successful", token });
+});
 
 app.post("/api/product/post", (req, res) => {
   console.log(req.body);

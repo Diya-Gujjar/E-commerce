@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import "./Register.css";
-import RegisterLoginHeader from "../Register-login-header/Register-login-header";
+import Header from "../Header/Header";
 import ShortLink from "../ShortLink/ShortLink";
+import axios from "axios";
 
 function Register() {
   const [mobile, setMobile] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-  const handleLoginSubmit = (e) => {
+  const handleContinue = (e) => {
     e.preventDefault();
     setError("");
 
@@ -21,7 +25,7 @@ function Register() {
       return;
     }
 
-    console.log("Registered In");
+    setShowForm(true);
   };
 
   const handleMouseClick = () => {
@@ -32,54 +36,130 @@ function Register() {
     setClicked(false);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!username || !password) {
+      setError("Both username and password are required.");
+      return;
+    }
+
+    const userData = {
+      mobile,
+      username,
+      password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/register",
+        userData
+      );
+
+      if (response.data.success) {
+        console.log("User registered successfully!");
+      }
+    } catch (err) {
+      console.error("Error occurred while registering:", err);
+      setError("Registration failed. Please try again.");
+    }
+  };
+
   return (
     <div>
-      <RegisterLoginHeader />
+      <Header />
+      <div style={{ paddingTop: "52px" }} />
       <ShortLink />
       <div className="login-container">
-        {/* Left Login */}
+        {/* Left Register Section */}
         <div className="left-login">
           <div>
             <h1>Looks like you're new here!</h1>
           </div>
-          <div>Sign up with your mobile number to get started</div>
+          <div style={{ paddingTop: "20px" }}>
+            Sign up with your mobile number to get started
+          </div>
         </div>
 
-        {/* Right Login */}
+        {/* Right Register Section */}
         <div className="right-login">
-          <form onSubmit={handleLoginSubmit}>
-            <div className="inpt">
-              {clicked && (
-                <label htmlFor="mobileNo" className="login-label">
-                  Enter Mobile number
+          {!showForm ? (
+            <form onSubmit={handleContinue}>
+              <div className="inpt">
+                {clicked && (
+                  <label htmlFor="mobileNo" className="login-label">
+                    Enter Mobile number
+                  </label>
+                )}
+                <input
+                  name="mobileNo"
+                  id="signinNo"
+                  placeholder="Enter Mobile number"
+                  value={mobile}
+                  onClick={handleMouseClick}
+                  onBlur={handleMouseRemove}
+                  onChange={(e) => setMobile(e.target.value)}
+                  className={error ? "error-input" : ""}
+                />
+                {error && <div className="error-message">{error}</div>}
+              </div>
+
+              <div className="term-policy">
+                By continuing, you agree to Flipkart's
+                <a href="/terms"> Terms of Use</a> and
+                <a href="/policies"> Privacy Policy</a>.
+              </div>
+
+              <button className="req-login-otp" type="submit">
+                Continue
+              </button>
+              <button className="exist-user">
+                <a href="/login">Existing User? Log in</a>
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="inpt">
+                <label htmlFor="username" className="login-label">
+                  Username
                 </label>
-              )}
-              <input
-                name="mobileNo"
-                id="signinNo"
-                placeholder="Enter Mobile number"
-                value={mobile}
-                onClick={handleMouseClick}
-                onBlur={handleMouseRemove}
-                onChange={(e) => setMobile(e.target.value)}
-                className={error ? "error-input" : ""}
-              />
+                <input
+                  name="username"
+                  id="username"
+                  placeholder="Enter Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className={error ? "error-input" : ""}
+                />
+              </div>
+
+              <div className="inpt">
+                <label
+                  htmlFor="password"
+                  className="login-label"
+                  style={{ paddingTop: "5px" }}
+                >
+                  Password
+                </label>
+                <input
+                  name="password"
+                  id="password"
+                  placeholder="Enter Password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={error ? "error-input" : ""}
+                />
+              </div>
+
               {error && <div className="error-message">{error}</div>}
-            </div>
 
-            <div className="term-policy">
-              By continuing, you agree to Flipkart's
-              <a href="/terms"> Terms of Use</a> and
-              <a href="/policies"> Privacy Policy</a>.
-            </div>
-
-            <button className="req-login-otp" type="submit">
-              Continue
-            </button>
-            <button className="exist-user">
-              <a href="/login">Existing User? Log in</a>{" "}
-            </button>
-          </form>
+              <button className="req-login-otp" type="submit">
+                Submit
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>
