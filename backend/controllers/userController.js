@@ -44,25 +44,6 @@ exports.getCart = async (req, res) => {
   }
 };
 
-exports.getOrders = async (req, res) => {
-  const { userId } = req.params;
-
-  try {
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json({ orders: user.orders || [] });
-  } catch (err) {
-    console.error("Error fetching orders:", err);
-    res
-      .status(500)
-      .json({ message: "Error fetching orders", error: err.message });
-  }
-};
-
 exports.updateCart = async (req, res) => {
   const { userId, productId, quantity, size, color } = req.body;
 
@@ -148,37 +129,46 @@ exports.placeOrder = async (req, res) => {
       return res.status(400).json({ message: "Cart is empty" });
     }
 
-    const productIds = user.cart.map((item) => item.productId);
-    const productsFromDB = await Product.find({ id: { $in: productIds } });
+    const orderProducts = await Promise.all(
+      user.cart.map(async (cartItem) => {
+        const product = await Product.findById(cartItem.productId).exec();
 
-    const orderProducts = user.cart.map((cartItem) => {
-      const product = productsFromDB.find((p) => p.id === cartItem.productId);
+        if (!product) {
+          throw new Error(`Product with ID ${cartItem.productId} not found`);
+        }
 
-      const price = product?.price || 0;
-      const discount = product?.discount || 0;
-      const deliveryCharge = product?.deliveryCharge || 0;
-      const finalPrice = price - discount;
+        const price = Number(product?.price);
+        const discount = Number(product?.discount) || 0;
+        const deliveryCharge = Number(product?.deliveryCharge) || 0;
+        const finalPrice = price - discount;
 
-      return {
-        productId: cartItem.productId,
-        name: product?.name || "Unknown",
-        quantity: cartItem.quantity,
-        size: cartItem.size,
-        color: cartItem.color,
-        price,
-        discount,
-        finalPrice,
-        deliveryCharge,
-        image: product?.image || "",
-        seller: product?.seller || "Default Seller",
-      };
-    });
+        return {
+          productId: cartItem.productId,
+          name: product.name,
+          quantity: cartItem.quantity,
+          size: cartItem.size,
+          color: cartItem.color,
+          price,
+          discount,
+          finalPrice,
+          deliveryCharge,
+          image: product.image,
+          seller: product.seller || "Default Seller",
+        };
+      })
+    );
 
     const totalAmount = orderProducts.reduce(
       (acc, item) =>
         acc + item.quantity * item.finalPrice + item.deliveryCharge,
       0
     );
+
+    // const totalAmount = orderProducts.reduce(
+    //   (acc, item) =>
+    //     acc + item.quantity * item.finalPrice + item.deliveryCharge,
+    //   0
+    // );
 
     const newOrder = {
       orderId: Date.now().toString(),
@@ -200,6 +190,25 @@ exports.placeOrder = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error placing order", error: err.message });
+  }
+};
+
+exports.getOrders = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ orders: user.orders || [] });
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    res
+      .status(500)
+      .json({ message: "Error fetching orders", error: err.message });
   }
 };
 

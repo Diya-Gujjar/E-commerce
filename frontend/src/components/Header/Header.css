@@ -286,7 +286,7 @@
 
 @media (max-width: 1440px) and (min-width: 1200px) {
   .logo img {
-    height: 50px;
+    height: 60px;
     padding-bottom: 20px;
   }
 }
@@ -311,7 +311,7 @@
   }
 
   .logo img {
-    height: 35px;
+    height: 37px;
   }
 
   .header-search {

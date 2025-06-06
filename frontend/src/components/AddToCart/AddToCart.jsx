@@ -246,10 +246,10 @@ function AddToCart() {
                         <div className="cart-info">
                           <h4>{item.name}</h4>
                           {item.color && (
-                            <p className="clr">{item.color || "N/A"}</p>
+                            <p className="clr">Color: {item.color || "N/A"}</p>
                           )}
                           {item.size && (
-                            <p className="size">{item.size || "N/A"}</p>
+                            <p className="size">Size: {item.size || "N/A"}</p>
                           )}
                           <p className="seller">
                             Seller: {item.seller || "Flipkart"}

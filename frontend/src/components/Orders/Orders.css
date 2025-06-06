@@ -62,7 +62,7 @@
 .all-order-items {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .order-item {
@@ -126,11 +126,16 @@
         padding-top: 10px;
     }
 
-    .ordr-price-info {
-        justify-content: center;
+    .ordr-product-details {
+        max-width: 40%;
+        text-align: left;
     }
 
     .ordr-product-details span {
         padding: 10px 0;
+    }
+
+    .order-item {
+        gap: 30%;
     }
 }
