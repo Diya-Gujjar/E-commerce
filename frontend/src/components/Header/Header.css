@@ -265,6 +265,12 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: calc(100% - 50px);
+  gap: 5px;
+}
+
+.search-dropdown em {
+  background-color: yellow;
+  font-weight: bold;
 }
 
 .item-name {
@@ -273,6 +279,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left;
 }
 
 .item-price {
@@ -280,6 +287,10 @@
   font-size: 14px;
   font-weight: 500;
   margin-top: 4px;
+  text-align: left;
+}
+
+.item-snippet {
   text-align: left;
 }
 

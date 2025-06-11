@@ -56,6 +56,7 @@ function Header() {
     } else {
       setSearchResults([]);
     }
+    console.log(searchResults);
   }, [search]);
 
   return (
@@ -66,11 +67,7 @@ function Header() {
             <CiMenuBurger className="horiz-split" />
           </button>
           <div>{burgerState && <HamBurger />}</div>
-          {/* <img
-            src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fkheaderlogo_exploreplus_mobile-39120d.svg"
-            alt="logo"
-          /> */}
-          <img src={logo} alt="Logo"></img>
+          <img src={logo} alt="Logo" />
         </div>
 
         <div className="header-search">
@@ -100,8 +97,55 @@ function Header() {
                       navigate(`/productDescription/${item.objectID}`)
                     }
                   >
-                    <div className="item-name">{item.name}</div>
+                    <div
+                      className="item-name"
+                      dangerouslySetInnerHTML={{
+                        __html: item._highlightResult?.name?.value || item.name,
+                      }}
+                    />
                     <div className="item-price">₹{item.price}</div>
+
+                    {(() => {
+                      const highlight = item._highlightResult;
+                      if (highlight?.category?.matchLevel === "full") {
+                        return (
+                          <div className="item-snippet">
+                            <strong>Category :</strong>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: highlight.category.value,
+                              }}
+                            />
+                          </div>
+                        );
+                      } else if (highlight?.highlights?.matchLevel === "full") {
+                        return (
+                          <div className="item-snippet">
+                            <strong>Highlights: :</strong>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: highlight.highlights.value,
+                              }}
+                            />
+                          </div>
+                        );
+                      } else if (
+                        highlight?.description?.matchLevel === "full"
+                      ) {
+                        return (
+                          <div className="item-snippet">
+                            <strong>Description :</strong>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: highlight.description.value,
+                              }}
+                            />
+                          </div>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })()}
                   </div>
                 </div>
               ))}
@@ -178,14 +222,14 @@ function Header() {
               {cartItems.length > 0 && (
                 <div className="cart-count">{cartItems.length}</div>
               )}
-              <div className="small-disapper"> Cart </div>
+              <div className="small-disapper">Cart</div>
             </a>
           </li>
 
           <li className="lnk" id="header-seller">
             <a href="/seller" className="icon-content">
               <PiStorefront className="icon inc-size" />
-              <div className="small-disapper"> Become a Seller </div>
+              <div className="small-disapper">Become a Seller</div>
             </a>
           </li>
         </ul>
