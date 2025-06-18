@@ -8,16 +8,18 @@ const {
   placeOrder,
   getOrders,
   updateAddress,
+  emptyCart,
 } = require("../controllers/userController");
 
 router.post("/cart", addToCart);
-router.get("/cart", getCart);
+router.get("/cart/:userId", getCart);
 router.put("/cart", updateCart);
 router.delete("/cart/:productId", removeFromCart);
+router.delete("/cart/empty/:userId", emptyCart);
 
-router.post("/order", placeOrder);
-router.get("/orders", getOrders);
+router.post("/order/:userId", placeOrder);
+router.get("/orders/:userId", getOrders);
 
-router.put("/address", updateAddress);
+router.put("/address/:user_id", updateAddress);
 
 module.exports = router;
